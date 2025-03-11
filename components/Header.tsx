@@ -1,7 +1,7 @@
-import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import { BookOpen } from "lucide-react";
+import HeaderImageGrid from "./HeaderImageGrid";
 
 const Header = () => {
   return (
@@ -25,48 +25,17 @@ const Header = () => {
             </div>
           </div>
           <div className="mx-auto flex w-full items-center justify-center">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-2">
-              <div className="grid gap-4">
-                <div className="overflow-hidden rounded-lg">
-                  <Image
-                    src="https://static.wikia.nocookie.net/shingekinokyojin/images/9/93/Armin_Arlelt_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20210322005647"
-                    width={200}
-                    height={300}
-                    alt="Anime cover"
-                    className="aspect-[2/3] object-cover"
-                  />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                  <Image
-                    src="https://static.wikia.nocookie.net/shingekinokyojin/images/a/a1/Eren_Jaeger_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20220123225500"
-                    width={200}
-                    height={300}
-                    alt="Anime cover"
-                    className="aspect-[2/3] object-cover"
-                  />
-                </div>
-              </div>
-              <div className="grid gap-4">
-                <div className="overflow-hidden rounded-lg">
-                  <Image
-                    src="https://static.wikia.nocookie.net/shingekinokyojin/images/5/52/Thomas_Wagner_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20171215201507"
-                    width={200}
-                    height={300}
-                    alt="Anime cover"
-                    className="aspect-[2/3] object-cover"
-                  />
-                </div>
-                <div className="overflow-hidden rounded-lg">
-                  <Image
-                    src="https://static.wikia.nocookie.net/shingekinokyojin/images/9/99/Sandra_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20190519180153"
-                    width={200}
-                    height={300}
-                    alt="Anime cover"
-                    className="aspect-[2/3] object-cover"
-                  />
-                </div>
-              </div>
-            </div>
+            <HeaderImageGrid
+              imageUrls={[
+                "https://static.wikia.nocookie.net/shingekinokyojin/images/9/99/Sandra_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20190519180153",
+                "https://static.wikia.nocookie.net/shingekinokyojin/images/a/a1/Eren_Jaeger_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20220123225500",
+                "https://static.wikia.nocookie.net/shingekinokyojin/images/5/52/Thomas_Wagner_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20171215201507",
+                "https://static.wikia.nocookie.net/shingekinokyojin/images/9/93/Armin_Arlelt_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20210322005647",
+                "https://static.wikia.nocookie.net/shingekinokyojin/images/4/4f/Mikasa_Ackermann_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20210221220718",
+                "https://static.wikia.nocookie.net/shingekinokyojin/images/3/38/Jean_Kirschtein_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20210207230042",
+                "https://static.wikia.nocookie.net/shingekinokyojin/images/3/37/Conny_Springer_%28Anime%29_character_image.png/revision/latest/scale-to-width-down/350?cb=20210211105306",
+              ]}
+            />
           </div>
         </div>
       </div>

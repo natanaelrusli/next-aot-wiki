@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import {
   Card,
   CardDescription,
@@ -12,7 +11,31 @@ import { Heart, Star, TrendingUp } from "lucide-react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-const TopEpisodesSection = () => {
+type Episode = {
+  id: number;
+  name: string;
+  episode: string;
+  img: string;
+  characters: string[];
+};
+
+async function getEpisodes(): Promise<Episode[]> {
+  const response = await fetch("https://api.attackontitanapi.com/episodes", {
+    next: { revalidate: 3600 }, // Revalidate every hour
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch episodes");
+  }
+
+  const data = await response.json();
+
+  return data.results.slice(5, 9);
+}
+
+async function TopEpisodesSection() {
+  const episodes = await getEpisodes();
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
       <div className="container px-4 md:px-6">
@@ -22,40 +45,37 @@ const TopEpisodesSection = () => {
               Top Episodes
             </h2>
             <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Discover what's the most popular episodes.
+              Discover the highest-rated Attack on Titan episodes
             </p>
           </div>
         </div>
         <div className="mx-auto grid max-w-5xl gap-6 py-12 md:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3, 4].map((i) => (
-            <Card key={i} className="overflow-hidden">
+          {episodes.map((episode) => (
+            <Card key={episode.id} className="overflow-hidden">
               <div className="relative">
                 <Image
-                  src={`/placeholder.svg?height=400&width=300`}
+                  src={episode.img || "/placeholder.svg"}
                   width={300}
                   height={400}
-                  alt={`Trending anime ${i}`}
+                  alt={`Episode ${episode.episode}: ${episode.name}`}
                   className="aspect-[3/4] object-cover w-full"
                 />
                 <div className="absolute top-2 right-2">
                   <Badge className="flex items-center gap-1 bg-black/60 hover:bg-black/60">
-                    <Star className="h-3 w-3 fill-current" /> 4.{9 - i}
+                    <Star className="h-3 w-3 fill-current" />{" "}
+                    {(Math.random() * 4 + 1).toFixed()}
                   </Badge>
                 </div>
               </div>
               <CardHeader className="p-4">
                 <CardTitle className="line-clamp-1">
-                  Trending Anime Title {i}
+                  Episode {episode.episode}: {episode.name}
                 </CardTitle>
                 <CardDescription className="line-clamp-1">
-                  Action, Adventure, Fantasy
+                  Season 1
                 </CardDescription>
               </CardHeader>
-              <CardFooter className="p-4 pt-0 flex justify-between">
-                <div className="flex items-center text-sm text-muted-foreground">
-                  <TrendingUp className="mr-1 h-3 w-3" />
-                  {Math.floor(Math.random() * 1000) + 100} watching
-                </div>
+              <CardFooter className="p-4 pt-0 flex justify-start">
                 <Button variant="ghost" size="icon" className="rounded-full">
                   <Heart className="h-4 w-4" />
                   <span className="sr-only">Add to favorites</span>
@@ -74,6 +94,6 @@ const TopEpisodesSection = () => {
       </div>
     </section>
   );
-};
+}
 
 export default TopEpisodesSection;

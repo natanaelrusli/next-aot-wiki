@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
 
 const Navbar = () => {
   return (
@@ -21,10 +20,10 @@ const Navbar = () => {
           </Link>
           <nav className="hidden gap-6 md:flex">
             <Link
-              href="#"
+              href="/episodes"
               className="flex items-center text-base font-medium transition-colors hover:text-primary"
             >
-              Browse
+              Browse Episodes
             </Link>
             <Link
               href="#"
